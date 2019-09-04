@@ -15,6 +15,7 @@ def main():
     model.train()
     acc, f1 = model.test(test[:, :-1], test[:, -1])
     print("accuracy : {} f1score : {}".format(acc, f1))
+    model.print_decision_tree()
 
 
 if __name__ == "__main__":

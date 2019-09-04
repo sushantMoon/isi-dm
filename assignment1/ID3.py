@@ -124,3 +124,31 @@ class decision_tree:
         )
 
         return acc, f1
+
+    def print_decision_tree(self):
+        queue = []
+        queue.append(self.root)
+        queue.append('|')
+        while len(queue) > 0:
+            flag = False
+            if type(queue[0]) != decision_node:
+                msg = queue.pop(0)
+                if msg != '|':
+                    print(msg)
+                else:
+                    print("-"*10)
+            else:
+                dn = queue.pop(0)
+                print(dn.decision_question.__repr__())
+                if type(dn.true_branch) == decision_node:
+                    queue.append(dn.true_branch)
+                    flag = True
+                else:
+                    queue.append("Leaf Node on true branch")
+                if type(dn.false_branch) == decision_node:
+                    queue.append(dn.false_branch)
+                    flag = True
+                else:
+                    queue.append("Leaf Node on false branch")
+                if flag:
+                    queue.append('|')
