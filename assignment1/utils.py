@@ -118,6 +118,30 @@ def get_iris_data(
     return feature_names, train, test
 
 
+def get_wine_data(
+        ratio_train=0.8
+        ):
+    """returns the wine data splitted into train and test
+
+    Keyword Arguments:
+        ratio_train {float} -- ratio of the train data from the total wine
+            Data, 1- ratio_train is the size of test data (default: {0.8})
+    """
+    wine = datasets.load_wine()
+    data = wine.data
+    target = wine.target.reshape(wine.target.shape[0], 1)
+    data = np.append(data, target, axis=1)
+    np.random.shuffle(data)
+
+    n = int(wine.data.shape[0] * ratio_train)
+
+    train = data[:n]
+    test = data[n:]
+
+    feature_names = wine.feature_names
+    return feature_names, train, test
+
+
 def unique_values(df, col):
     return np.unique(df[:, col])
 
