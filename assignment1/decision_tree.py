@@ -3,7 +3,7 @@ from utils import get_iris_data, get_wine_data
 
 
 def main():
-    features, train, test = get_iris_data(0.9)
+    features, train, test = get_iris_data(0.8)
     # features, train, test = get_wine_data(0.8)
 
     model = decision_tree(
@@ -13,7 +13,8 @@ def main():
         min_sample_split=10
     )
     model.train()
-    print(model.test(test[:, :-1], test[:, -1]))
+    acc, f1 = model.test(test[:, :-1], test[:, -1])
+    print("accuracy : {} f1score : {}".format(acc, f1))
 
 
 if __name__ == "__main__":
